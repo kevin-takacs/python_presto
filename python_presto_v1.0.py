@@ -33,12 +33,12 @@ def stub():
 
 class OptionsAndArguments():
     """ This class handles options and arguments passed in from the 
-    command line in the  common UNIX way (e.g. $ ./python_start.py 
+    command line in the common UNIX way (e.g. $ ./python_start.py 
     --debug -e testy@mcgee.com url_list.txt).  In the example, the program 
     is getting passed the debug option in the long format and the email 
     option in the short format.  The argument 'url_list.txt' is also being 
-    passed.  Arguments are usually reserved for file handles on which are 
-    to be operated.
+    passed.  Arguments are usually reserved for file handles that are going
+    to be operated on.
     """
     def __init__(self, option_definitions):
         """ On init, this class requires a list of tuples to be passed to it that 
