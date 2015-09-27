@@ -51,7 +51,7 @@ class OptionsAndArguments():
             args = (option_tuple[0], option_tuple[1])
             kwargs = option_tuple[2]
             options.append(self.OptionParser.Option(*args, **kwargs))
-       # Build usage message.
+        # Build usage message.
         self.usage = ""
         for option in options:
             self.usage += option._short_opts[0].replace("-","")
