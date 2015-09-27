@@ -10,7 +10,7 @@ __credits__ = 'www.python.org for the Option and OptionParser extensions.'
 import sys
 import optparse
 import datetime
-import pdb # pdb.set_trace()
+import pdb 
 
 
 class Stub:
@@ -33,10 +33,10 @@ def stub():
 
 class OptionsAndArguments():
     """ This class handles options and arguments passed in from the 
-    command line in the common UNIX way (e.g. $ ./python_start.py 
-    --debug -e testy@mcgee.com url_list.txt).  In the example, the program 
+    command line in the common *NIX way (e.g. $ ./python_presto_v1.0.py 
+    --debug -e test@example.com logfile.txt).  In the example, the program 
     is getting passed the debug option in the long format and the email 
-    option in the short format.  The argument 'url_list.txt' is also being 
+    option in the short format.  The argument 'logfile.txt' is also being 
     passed.  Arguments are usually reserved for file handles that are going
     to be operated on.
     """
@@ -61,7 +61,7 @@ class OptionsAndArguments():
             sys.argv[0], 
             self.usage, 
             "h"
-            )
+        )
         # Parse the list of options and assign values to the attributes.
         parser = self.OptionParser(usage=self.usage, option_list=options)
         (opts, args) = parser.parse_args()
@@ -76,6 +76,7 @@ class OptionsAndArguments():
         def _init_parsing_state (self):
             optparse.OptionParser._init_parsing_state(self)
             self.option_seen = {}
+            return None
         def check_values (self, values, args):
             for option in self.option_list:
                 if (isinstance(option, self.Option) and option.required and 
@@ -91,14 +92,16 @@ class OptionsAndArguments():
             def _check_required (self):
                 if self.required and not self.takes_value():
                     raise OptionError(
-                        "required flag set for option that doesn't take a value", 
+                        "Required flag set for option that doesn't take a value", 
                         self
                     )
+                return None
             # Make sure _check_required() is called from the constructor.
             CHECK_METHODS = optparse.Option.CHECK_METHODS + [_check_required]
             def process (self, opt, value, values, parser):
                 optparse.Option.process(self, opt, value, values, parser)
                 parser.option_seen[self] = 1
+                return None 
 
 
 def now_stamp():
@@ -131,7 +134,8 @@ def file_to_list(filepath):
 def list_to_print(list):
     """ Print a passed list.
     """
-    for line in list: print line
+    for line in list: 
+        print line
     return None
 
 
@@ -163,7 +167,6 @@ def main():
     """
     # Use the Python debugger to set an interactive trace.
     # pdb.set_trace()
-
     print "HELLO TURKEYFACE! It's %s" % (now_stamp())
 
 
