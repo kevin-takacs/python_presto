@@ -124,7 +124,10 @@ def file_to_list(filepath):
     """ Read in a file and return it as a list with each line as an element.
     """
     try:
-        lines = [line.replace('\n', '') for line in open(filepath, 'r').readlines() if line]
+        lines = [
+            line.replace('\n', '') \
+            for line in open(filepath, 'r').readlines() if line
+        ]
         return lines
     except IOError:
         exit("IOError Exception: FILE NOT FOUND")
@@ -167,7 +170,16 @@ def main():
     """
     # Use the Python debugger to set an interactive trace.
     # pdb.set_trace()
-    print "HELLO TURKEYFACE! It's %s" % (now_stamp())
+    # A list and a list comprehension example.
+    faces = ['turkey', 'donkey', 'monkey', 'horse']
+    faces = [face.upper() for face in faces if 'key' in face]
+    # An enumerate and print format example.
+    for count, face in enumerate(faces):
+        print "%s - HELLO %sFACE! It's %s" % (
+            count,
+            face,
+            now_stamp()
+        )
 
 
 if __name__ == "__main__":
