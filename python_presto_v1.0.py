@@ -159,7 +159,6 @@ def main():
         ("-e", "--emailto", {'required': 0}),
         ("-p", "--password", {'required': 0}),
     ]
-
     cli = OptionsAndArguments(option_definitions)
     # Examples of option and argument methods and properties:
     """
@@ -171,13 +170,13 @@ def main():
     # Use the Python debugger to set an interactive trace.
     # pdb.set_trace()
     # A list and a list comprehension example.
-    faces = ['turkey', 'donkey', 'monkey', 'horse']
-    faces = [face.upper() for face in faces if 'key' in face]
+    animals = ['turkey', 'donkey', 'monkey', 'horse']
+    animals = [animal.upper() for animal in animals if 'key' in animal]
     # An enumerate and print format example.
-    for count, face in enumerate(faces):
+    for count, animal in enumerate(animals):
         print "%s - HELLO %sFACE! It's %s" % (
             count,
-            face,
+            animal,
             now_stamp()
         )
 
