@@ -50,6 +50,7 @@ class OptionsAndArguments():
         self.option_list = self.get_option_list()
         self.usage = self.get_usage()
         self.options, self.arguments = self.get_options_and_arguments()
+        return None
 
     def get_option_list(self):
         # Create the list of option objects based on the definitions.
