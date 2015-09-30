@@ -84,7 +84,7 @@ class OptionsAndArguments():
         )
         return option_parser.parse_args()
 
-    class OptionParser (optparse.OptionParser):
+    class OptionParser(optparse.OptionParser):
         """ Taken from python.org.  OptionParser extends 
         optparse.OptionParser. 
         """
@@ -100,7 +100,7 @@ class OptionsAndArguments():
                     self.error("%s not supplied" % option)
             return (values, args)
 
-        class Option (optparse.Option):
+        class Option(optparse.Option):
             """Taken from python.org.  Extend 'optparse.Option' object to 
             account for required options.
             """
