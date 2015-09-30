@@ -1,7 +1,7 @@
 #! /usr/bin/python
 __program_name__ = 'Python Presto'
+__program_description__ = 'A starting point for a Python program.'
 __file_name__ = 'python_presto_v1.0.py'
-__description__ = 'A starting point for a Python program.'
 __author__ = 'Kevin Takacs <kevin@kevin.pub>'
 __copyright__ = '(C) 2015 GNU GPL 2'
 __version__ = '1.0'
@@ -40,34 +40,48 @@ class OptionsAndArguments():
     passed.  Arguments are usually reserved for file handles that are going
     to be operated on.
     """
-    def __init__(self, option_definitions):
-        """ On init, this class requires a list of tuples to be passed to it that 
-        define the options.
+    def __init__(self, option_definitions, program_name, program_description):
+        """ On init, this class requires a list of tuples to be passed 
+        to it that define the options.
         """
+        self.program_name = program_name
+        self.program_description = program_description
+        self.option_definitions = option_definitions
+        self.option_list = self.get_option_list()
+        self.usage = self.get_usage()
+        self.options, self.arguments = self.get_options_and_arguments()
+
+    def get_option_list(self):
         # Create the list of option objects based on the definitions.
-        options= []
-        for option_tuple in option_definitions:
+        option_list = []
+        for option_tuple in self.option_definitions:
             # Set arguments and keyword arguments from option_definitions.
             args = (option_tuple[0], option_tuple[1])
             kwargs = option_tuple[2]
-            options.append(self.OptionParser.Option(*args, **kwargs))
+            option_list.append(self.OptionParser.Option(*args, **kwargs))
+        return option_list
+
+    def get_usage(self):
         # Build usage message.
-        self.usage = ""
-        for option in options:
-            self.usage += option._short_opts[0].replace("-","")
-        self.usage = "\n%s\n%s\n\n%s -[%s%s] " % (
-            __program_name__,
-            __description__,
+        usage = ""
+        for option in self.option_list:
+            usage += option._short_opts[0].replace("-","")
+        usage = "\n%s\n%s\n\n%s -[%s%s] " % (
+            self.program_name,
+            self.program_description,
             sys.argv[0], 
-            self.usage, 
+            usage, 
             "h"
         )
+        return usage
+
+    def get_options_and_arguments(self):
         # Parse the list of options and assign values to the attributes.
-        parser = self.OptionParser(usage=self.usage, option_list=options)
-        (opts, args) = parser.parse_args()
-        self.options = opts
-        self.arguments = args
-        return None
+        option_parser = self.OptionParser(
+            usage=self.usage, 
+            option_list=self.option_list
+        )
+        return option_parser.parse_args()
 
     class OptionParser (optparse.OptionParser):
         """ Taken from python.org.  OptionParser extends 
@@ -77,6 +91,7 @@ class OptionsAndArguments():
             optparse.OptionParser._init_parsing_state(self)
             self.option_seen = {}
             return None
+
         def check_values (self, values, args):
             for option in self.option_list:
                 if (isinstance(option, self.Option) and option.required and 
@@ -159,7 +174,11 @@ def main():
         ("-e", "--emailto", {'required': 0}),
         ("-p", "--password", {'required': 0}),
     ]
-    cli = OptionsAndArguments(option_definitions)
+    cli = OptionsAndArguments(
+        option_definitions, 
+        __program_name__,
+        __program_description__,
+    )
     # Examples of option and argument methods and properties:
     """
     print cli.options
@@ -170,7 +189,7 @@ def main():
     # Use the Python debugger to set an interactive trace.
     # pdb.set_trace()
     # A list and a list comprehension example.
-    animals = ['turkey', 'donkey', 'monkey', 'horse']
+    animals = ['turkey', 'donkey', 'monkey', 'horsey']
     animals = [animal.upper() for animal in animals if 'key' in animal]
     # An enumerate and print format example.
     for count, animal in enumerate(animals):
