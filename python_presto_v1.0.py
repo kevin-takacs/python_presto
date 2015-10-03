@@ -165,8 +165,7 @@ def dict_to_print(d):
 
 
 def main():
-    """ Set-up options and arguments. Example:
-    """
+    # Set-up options and arguments. Example:
     option_definitions = [
         ("-d", "--debug", {'action': 'count'}), 
         ("-e", "--emailto", {'required': 0}),
