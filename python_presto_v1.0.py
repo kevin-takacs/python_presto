@@ -17,8 +17,8 @@ class Stub:
     """ Describe the class here.
     """
     def __init__(self, test):
-        """ The init method is called at the creation of a new class.
-        Arguments passed during the class creation are available to this method.
+        """ The init method is called at the creation of a new class.  Arguments
+        passed during the class creation are available to this method.  
         """
         self.test = test
         return None
@@ -32,13 +32,12 @@ def stub():
 
 
 class OptionsAndArguments():
-    """ This class handles options and arguments passed in from the 
-    command line in the common *NIX way (e.g. $ ./python_presto_v1.0.py 
-    --debug -e test@example.com logfile.txt).  In the example, the program 
-    is getting passed the debug option in the long format and the email 
-    option in the short format.  The argument 'logfile.txt' is also being 
-    passed.  Arguments are usually reserved for file handles that are going
-    to be operated on.
+    """ This class handles options and arguments passed in from the command line
+    in the common *NIX way (e.g. $ ./python_presto_v1.0.py --debug -e
+    test@example.com logfile.txt).  In the example, the program is getting
+    passed the debug option in the long format and the email option in the short
+    format.  The argument 'logfile.txt' is also being passed.  Arguments are
+    usually reserved for file handles that are going to be operated on.
     """
     def __init__(self, option_definitions, program_name, program_description):
         """ On init, this class requires a list of tuples to be passed 
@@ -85,23 +84,10 @@ class OptionsAndArguments():
         return option_parser.parse_args()
 
     class OptionParser(optparse.OptionParser):
-        """ Taken from python.org.  OptionParser extends 
-        optparse.OptionParser. 
+        """ Taken from python.org.  OptionParser extends optparse.OptionParser.
         """
-        def _init_parsing_state (self):
-            optparse.OptionParser._init_parsing_state(self)
-            self.option_seen = {}
-            return None
-
-        def check_values (self, values, args):
-            for option in self.option_list:
-                if (isinstance(option, self.Option) and option.required and 
-                    not self.option_seen.has_key(option)):
-                    self.error("%s not supplied" % option)
-            return (values, args)
-
         class Option(optparse.Option):
-            """Taken from python.org.  Extend 'optparse.Option' object to 
+            """Taken from python.org.  Extend 'optparse.Option' object to
             account for required options.
             """
             ATTRS = optparse.Option.ATTRS + ['required']
@@ -118,6 +104,18 @@ class OptionsAndArguments():
                 optparse.Option.process(self, opt, value, values, parser)
                 parser.option_seen[self] = 1
                 return None 
+
+        def _init_parsing_state (self):
+            optparse.OptionParser._init_parsing_state(self)
+            self.option_seen = {}
+            return None
+
+        def check_values (self, values, args):
+            for option in self.option_list:
+                if (isinstance(option, self.Option) and option.required and 
+                    not self.option_seen.has_key(option)):
+                    self.error("%s not supplied" % option)
+            return (values, args)
 
 
 def now_stamp():
@@ -167,8 +165,7 @@ def dict_to_print(d):
 
 
 def main():
-    """ Set-up options and arguments, if needed.
-    Example:
+    """ Set-up options and arguments. Example:
     """
     option_definitions = [
         ("-d", "--debug", {'action': 'count'}), 
@@ -187,8 +184,6 @@ def main():
     print cli.options.debug
     print cli.options.emailto
     """
-    # Use the Python debugger to set an interactive trace.
-    # pdb.set_trace()
     # A list and a list comprehension example.
     animals = ['turkey', 'donkey', 'monkey', 'horsey']
     animals = [animal.upper() for animal in animals if 'key' in animal]
@@ -199,6 +194,8 @@ def main():
             animal,
             now_stamp()
         )
+    # Use the Python debugger to set an interactive trace.
+    # pdb.set_trace()
 
 
 if __name__ == "__main__":
