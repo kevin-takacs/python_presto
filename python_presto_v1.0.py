@@ -1,11 +1,11 @@
 #! /usr/bin/python
-__program_name__ = 'Python Presto'
-__program_description__ = 'A starting point for a Python program.'
-__file_name__ = 'python_presto_v1.0.py'
-__author__ = 'Kevin Takacs <kevin@kevin.pub>'
-__copyright__ = '(C) 2015 GNU GPL 2'
-__version__ = '1.0'
-__credits__ = 'www.python.org for the Option and OptionParser extensions.'
+__program_name__ = "Python Presto"
+__program_description__ = "A starting point for a Python program."
+__file_name__ = "python_presto_v1.0.py"
+__author__ = "Kevin Takacs <kevin@kevin.pub>"
+__copyright__ = "(C) 2015 GNU GPL 2"
+__version__ = "1.0"
+__credits__ = "www.python.org for the Option and OptionParser extensions."
 
 import sys
 import optparse
@@ -32,16 +32,16 @@ def stub():
 
 
 class OptionsAndArguments():
-    """ This class handles options and arguments passed in from the command line
-    in the common *NIX way (e.g. $ ./python_presto_v1.0.py --debug -e
-    test@example.com logfile.txt).  In the example, the program is getting
-    passed the debug option in the long format and the email option in the short
-    format.  The argument 'logfile.txt' is also being passed.  Arguments are
-    usually reserved for file handles that are going to be operated on.
+    """ This class parses options and arguments passed from the command line in
+    the common *NIX way (e.g. $ ./python_presto_v1.0.py --debug -e foo@bar.com
+    logfile.txt).  In the example, the program is getting passed the debug
+    option in the long format and the email option in the short format.  The
+    argument 'logfile.txt' is also being passed.  Arguments are usually reserved
+    for file handles that are going to be operated on, but don't have to be.
     """
     def __init__(self, option_definitions, program_name, program_description):
         """ On init, this class requires a list of tuples to be passed 
-        to it that define the options.
+        to it that define the options along with program information.
         """
         self.program_name = program_name
         self.program_description = program_description
@@ -167,9 +167,9 @@ def dict_to_print(d):
 def main():
     # Set-up options and arguments. Example:
     option_definitions = [
-        ("-d", "--debug", {'action': 'count'}), 
-        ("-e", "--emailto", {'required': 0}),
-        ("-p", "--password", {'required': 0}),
+        ('-d', '--debug', {'action': 'count'}), 
+        ('-e', '--emailto', {'required': 0}),
+        ('-p', '--password', {'required': 0}),
     ]
     cli = OptionsAndArguments(
         option_definitions, 
@@ -188,14 +188,10 @@ def main():
     animals = [animal.upper() for animal in animals if 'key' in animal]
     # An enumerate and print format example.
     for count, animal in enumerate(animals):
-        print "%s - HELLO %sFACE! It's %s" % (
-            count,
-            animal,
-            now_stamp()
-        )
+        print "%s - HELLO %sFACE! It's %s" % (count, animal, now_stamp())        
     # Use the Python debugger to set an interactive trace.
     # pdb.set_trace()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
