@@ -47,7 +47,7 @@ class OptionsAndArguments():
         self.program_description = program_description
         self.option_definitions = option_definitions
         self.option_list = self.get_option_list()
-        self.usage = self.get_usage()
+        self.usage_message = self.get_usage_message()
         self.options, self.arguments = self.get_options_and_arguments()
         return None
 
@@ -61,24 +61,24 @@ class OptionsAndArguments():
             option_list.append(self.OptionParser.Option(*args, **kwargs))
         return option_list
 
-    def get_usage(self):
+    def get_usage_message(self):
         # Build usage message.
-        usage = ""
+        usage_message = ""
         for option in self.option_list:
-            usage += option._short_opts[0].replace("-","")
-        usage = "\n%s\n%s\n\n%s -[%s%s] " % (
+            usage_message += option._short_opts[0].replace("-","")
+        usage_message = "\n%s\n%s\n\n%s -[%s%s] " % (
             self.program_name,
             self.program_description,
             sys.argv[0], 
-            usage, 
+            usage_message, 
             "h"
         )
-        return usage
+        return usage_message
 
     def get_options_and_arguments(self):
         # Parse the list of options and assign values to the attributes.
         option_parser = self.OptionParser(
-            usage=self.usage, 
+            usage=self.usage_message, 
             option_list=self.option_list
         )
         return option_parser.parse_args()
