@@ -171,11 +171,8 @@ def main():
         ('-e', '--emailto', {'required': 0}),
         ('-p', '--password', {'required': 0}),
     ]
-    cli = OptionsAndArguments(
-        option_definitions, 
-        __program_name__,
-        __program_description__,
-    )
+    args = [option_definitions, __program_name__, __program_description__]
+    cli = OptionsAndArguments(*args)
     # Examples of option and argument methods and properties:
     """
     print cli.options
