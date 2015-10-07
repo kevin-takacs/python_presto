@@ -43,9 +43,9 @@ class OptionsAndArguments():
         """ On init, this class requires a list of tuples to be passed 
         to it that define the options along with program information.
         """
+        self.option_definitions = option_definitions
         self.program_name = program_name
         self.program_description = program_description
-        self.option_definitions = option_definitions
         self.option_list = self.get_option_list()
         self.usage_message = self.get_usage_message()
         self.options, self.arguments = self.get_options_and_arguments()
