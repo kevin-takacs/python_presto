@@ -118,6 +118,17 @@ class OptionsAndArguments():
             return (values, args)
 
 
+def print_red(text, center=False):
+    if center:
+        space = " " * int((80 - len(text)) / 2)
+        text = "%s%s%s" % (space, text, space)
+        if not len(text) == 80:
+            text += " " * (80 - len(text))
+    text = "\x1b[1m\x1b[37m\x1b[41m %s \x1b[22m\x1b[39m\x1b[49m" % (text)
+    print text
+    return None
+
+
 def now_stamp():
     """ Returns a the datetime of now in the format YYMMDD_HHMMSS.
     """
@@ -167,25 +178,28 @@ def dict_to_print(d):
 def main():
     # Set-up options and arguments. Example:
     option_definitions = [
-        ('-d', '--debug', {'action': 'count'}), 
-        ('-e', '--emailto', {'required': 0}),
-        ('-p', '--password', {'required': 0}),
+        ('-r', '--red', {'action': 'count'}), 
+        ('-a', '--animal', {'required': 0}),
     ]
     args = [option_definitions, __program_name__, __program_description__]
     cli = OptionsAndArguments(*args)
     # Examples of option and argument methods and properties:
     """
-    print cli.options
-    print cli.arguments
-    print cli.options.debug
-    print cli.options.emailto
+    print cli.options.animal
+    print cli.options.red
     """
     # A list and a list comprehension example.
     animals = ['turkey', 'donkey', 'monkey', 'horsey']
+    # Add animal if passed from CLI.
+    if cli.options.animal:
+        animals.append(cli.options.animal)
     animals = [animal.upper() for animal in animals if 'key' in animal]
     # An enumerate and print format example.
     for count, animal in enumerate(animals):
-        print "%s - HELLO %sFACE! It's %s" % (count, animal, now_stamp())        
+        if cli.options.red:
+            print_red("%s - HELLO %s FACE! It's %s" % (count, animal, now_stamp()), center=True)
+        else:
+            print "%s - HELLO %s FACE! It's %s" % (count, animal, now_stamp())
     # Use the Python debugger to set an interactive trace.
     # pdb.set_trace()
 
