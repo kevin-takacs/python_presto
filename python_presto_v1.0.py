@@ -10,8 +10,12 @@ __credits__ = "www.python.org for the Option and OptionParser extensions."
 import sys
 import optparse
 import datetime
-import pdb 
 
+# Use the Python debugger to set an interactive trace.
+"""
+import pdb 
+pdb.set_trace()
+"""
 
 class Stub:
     """ Describe the class here.
@@ -124,7 +128,9 @@ def print_red(text, center=False):
         text = "%s%s%s" % (space, text, space)
         if not len(text) == 80:
             text += " " * (80 - len(text))
-    text = "\x1b[1m\x1b[37m\x1b[41m %s \x1b[22m\x1b[39m\x1b[49m" % (text)
+    code_red = "\x1b[1m\x1b[37m\x1b[41m"
+    code_black = "\x1b[22m\x1b[39m\x1b[49m"
+    text = "%s%s%s" % (code_red, text, code_black)
     print text
     return None
 
@@ -188,20 +194,23 @@ def main():
     print cli.options.animal
     print cli.options.red
     """
-    # A list and a list comprehension example.
+    # A list of animals:
     animals = ['turkey', 'donkey', 'monkey', 'horsey']
-    # Add animal if passed from CLI.
+    # Add an animal if passed from CLI.
     if cli.options.animal:
         animals.append(cli.options.animal)
+    """ A list comprehension example to only return animals with the string
+    'key' in their names and to also make the names upper case.
+    """
     animals = [animal.upper() for animal in animals if 'key' in animal]
     # An enumerate and print format example.
     for count, animal in enumerate(animals):
         if cli.options.red:
-            print_red("%s - HELLO %s FACE! It's %s" % (count, animal, now_stamp()), center=True)
+            print_red("%s - HELLO %s FACE! It's %s" % (
+                count, animal, now_stamp()), center=True
+            )
         else:
             print "%s - HELLO %s FACE! It's %s" % (count, animal, now_stamp())
-    # Use the Python debugger to set an interactive trace.
-    # pdb.set_trace()
 
 
 if __name__ == '__main__':
