@@ -1,7 +1,7 @@
 #! /usr/bin/python
 __program_name__ = "Python Presto"
 __program_description__ = "A starting point for a Python program."
-__file_name__ = "python_presto_v1.0.py"
+__file_name__ = "python_presto.py"
 __author__ = "Kevin Takacs <kevin@kevin.pub>"
 __copyright__ = "(C) 2015 GNU GPL 2"
 __version__ = "1.0"
@@ -179,7 +179,7 @@ def dict_to_print(d):
     for key in d.keys():
         spaces = " " * (10 - len(key))
         print "key:%s %s value:%s" % (key, spaces, d[key])
-
+    return None
 
 def main():
     # Set-up options and arguments. Example:
@@ -212,6 +212,7 @@ def main():
         else:
             print "%s - HELLO %s FACE! It's %s" % (count, animal, now_stamp())
 
+    return None
 
 if __name__ == '__main__':
     main()
