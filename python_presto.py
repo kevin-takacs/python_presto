@@ -148,7 +148,7 @@ def file_to_string(filepath):
         return open(filepath, 'r').read()
     except IOError:
         exit("IOError Exception: FILE NOT FOUND")
-        return None
+    return None
 
 
 def file_to_list(filepath):
@@ -162,7 +162,7 @@ def file_to_list(filepath):
         return lines
     except IOError:
         exit("IOError Exception: FILE NOT FOUND")
-        return None
+    return None
 
 
 def list_to_print(list):
@@ -211,7 +211,6 @@ def main():
             )
         else:
             print "%s - HELLO %s FACE! It's %s" % (count, animal, now_stamp())
-
     return None
 
 if __name__ == '__main__':
