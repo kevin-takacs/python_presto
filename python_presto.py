@@ -181,6 +181,7 @@ def dict_to_print(d):
         print "key:%s %s value:%s" % (key, spaces, d[key])
     return None
 
+
 def main():
     # Set-up options and arguments. Example:
     option_definitions = [
@@ -212,6 +213,7 @@ def main():
         else:
             print "%s - HELLO %s FACE! It's %s" % (count, animal, now_stamp())
     return None
+
 
 if __name__ == '__main__':
     main()
