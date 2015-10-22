@@ -1,4 +1,12 @@
 #! /usr/bin/python
+import sys
+import optparse
+import datetime
+# Use the Python debugger to set an interactive trace.
+"""
+import pdb
+pdb.set_trace()
+"""
 __program_name__ = "Python Presto"
 __program_description__ = "A starting point for a Python program."
 __file_name__ = "python_presto.py"
@@ -7,22 +15,13 @@ __copyright__ = "(C) 2015 GNU GPL 2"
 __version__ = "1.0"
 __credits__ = "www.python.org for the Option and OptionParser extensions."
 
-import sys
-import optparse
-import datetime
-
-# Use the Python debugger to set an interactive trace.
-"""
-import pdb 
-pdb.set_trace()
-"""
 
 class Stub:
     """ Describe the class here.
     """
     def __init__(self, test):
         """ The init method is called at the creation of a new class.  Arguments
-        passed during the class creation are available to this method.  
+        passed during the class creation are available to this method.
         """
         self.test = test
         return None
@@ -44,7 +43,7 @@ class OptionsAndArguments():
     for file handles that are going to be operated on, but don't have to be.
     """
     def __init__(self, option_definitions, program_name, program_description):
-        """ On init, this class requires a list of tuples to be passed 
+        """ On init, this class requires a list of tuples to be passed
         to it that define the options along with program information.
         """
         self.option_definitions = option_definitions
@@ -69,7 +68,7 @@ class OptionsAndArguments():
         # Build usage message.
         usage_message = ""
         for option in self.option_list:
-            usage_message += option._short_opts[0].replace("-","")
+            usage_message += option._short_opts[0].replace("-", "")
         usage_message = "\n%s\n%s\n\n%s -[%s%s] " % (
             self.program_name,
             self.program_description,
