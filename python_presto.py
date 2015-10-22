@@ -39,8 +39,9 @@ class OptionsAndArguments():
     the common *NIX way (e.g. $ ./python_presto_v1.0.py --debug -e foo@bar.com
     logfile.txt).  In the example, the program is getting passed the debug
     option in the long format and the email option in the short format.  The
-    argument 'logfile.txt' is also being passed.  Arguments are usually reserved
-    for file handles that are going to be operated on, but don't have to be.
+    argument 'logfile.txt' is also being passed.  Arguments are usually
+    reserved for file handles that are going to be operated on, but don't have
+    to be.
     """
     def __init__(self, option_definitions, program_name, program_description):
         """ On init, this class requires a list of tuples to be passed
@@ -72,8 +73,8 @@ class OptionsAndArguments():
         usage_message = "\n%s\n%s\n\n%s -[%s%s] " % (
             self.program_name,
             self.program_description,
-            sys.argv[0], 
-            usage_message, 
+            sys.argv[0],
+            usage_message,
             "h"
         )
         return usage_message
@@ -81,7 +82,7 @@ class OptionsAndArguments():
     def get_options_and_arguments(self):
         # Parse the list of options and assign values to the attributes.
         option_parser = self.OptionParser(
-            usage=self.usage_message, 
+            usage=self.usage_message,
             option_list=self.option_list
         )
         return option_parser.parse_args()
@@ -94,10 +95,10 @@ class OptionsAndArguments():
             account for required options.
             """
             ATTRS = optparse.Option.ATTRS + ['required']
-            def _check_required (self):
+            def _check_required(self):
                 if self.required and not self.takes_value():
                     raise OptionError(
-                        "Required flag set for option that doesn't take a value", 
+                        "Required flag set for option that doesn't take a value",
                         self
                     )
                 return None
@@ -108,15 +109,16 @@ class OptionsAndArguments():
                 parser.option_seen[self] = 1
                 return None 
 
-        def _init_parsing_state (self):
+        def _init_parsing_state(self):
             optparse.OptionParser._init_parsing_state(self)
             self.option_seen = {}
             return None
 
-        def check_values (self, values, args):
+        def check_values(self, values, args):
             for option in self.option_list:
-                if (isinstance(option, self.Option) and option.required and 
-                    not self.option_seen.has_key(option)):
+                if (isinstance(option, self.Option) and option.required and
+                    not self.option_seen.has_key(option)
+                ):
                     self.error("%s not supplied" % option)
             return (values, args)
 
@@ -155,7 +157,7 @@ def file_to_list(filepath):
     """
     try:
         lines = [
-            line.replace('\n', '') \
+            line.replace('\n', '')
             for line in open(filepath, 'r').readlines() if line
         ]
         return lines
@@ -167,7 +169,7 @@ def file_to_list(filepath):
 def list_to_print(list):
     """ Print a passed list.
     """
-    for line in list: 
+    for line in list:
         print line
     return None
 
@@ -184,7 +186,7 @@ def dict_to_print(d):
 def main():
     # Set-up options and arguments. Example:
     option_definitions = [
-        ('-r', '--red', {'action': 'count'}), 
+        ('-r', '--red', {'action': 'count'}),
         ('-a', '--animal', {'required': 0}),
     ]
     args = [option_definitions, __program_name__, __program_description__]
@@ -216,3 +218,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
