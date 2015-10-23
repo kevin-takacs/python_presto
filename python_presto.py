@@ -98,16 +98,18 @@ class OptionsAndArguments():
             def _check_required(self):
                 if self.required and not self.takes_value():
                     raise OptionError(
-                        "Required flag set for option that doesn't take a value",
+                        """Required flag set for option that doesn't take
+                        a value
+                        """,
                         self
                     )
                 return None
             # Make sure _check_required() is called from the constructor.
             CHECK_METHODS = optparse.Option.CHECK_METHODS + [_check_required]
-            def process (self, opt, value, values, parser):
+            def process(self, opt, value, values, parser):
                 optparse.Option.process(self, opt, value, values, parser)
                 parser.option_seen[self] = 1
-                return None 
+                return None
 
         def _init_parsing_state(self):
             optparse.OptionParser._init_parsing_state(self)
@@ -218,5 +220,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
