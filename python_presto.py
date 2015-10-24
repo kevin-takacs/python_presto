@@ -120,8 +120,8 @@ class OptionsAndArguments():
 
         def check_values(self, values, args):
             for option in self.option_list:
-                if isinstance(option, self.Option) and
-                    option.required and not
+                if isinstance(option, self.Option) and \
+                    option.required and not \
                     self.option_seen.has_key(option):
                     self.error("%s not supplied" % option)
             return (values, args)
