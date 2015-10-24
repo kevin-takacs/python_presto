@@ -95,6 +95,7 @@ class OptionsAndArguments():
             account for required options.
             """
             ATTRS = optparse.Option.ATTRS + ['required']
+
             def _check_required(self):
                 if self.required and not self.takes_value():
                     raise OptionError(
@@ -106,6 +107,7 @@ class OptionsAndArguments():
                 return None
             # Make sure _check_required() is called from the constructor.
             CHECK_METHODS = optparse.Option.CHECK_METHODS + [_check_required]
+
             def process(self, opt, value, values, parser):
                 optparse.Option.process(self, opt, value, values, parser)
                 parser.option_seen[self] = 1
@@ -118,9 +120,9 @@ class OptionsAndArguments():
 
         def check_values(self, values, args):
             for option in self.option_list:
-                if (isinstance(option, self.Option) and option.required and
-                    not self.option_seen.has_key(option)
-                ):
+                if isinstance(option, self.Option) and
+                    option.required and not
+                    self.option_seen.has_key(option):
                     self.error("%s not supplied" % option)
             return (values, args)
 
@@ -220,3 +222,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
